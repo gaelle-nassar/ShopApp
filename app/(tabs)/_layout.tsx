@@ -1,7 +1,9 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
-
+import { Pressable, useColorScheme, TouchableOpacity, Text, Image ,StyleSheet} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import { Appbar } from 'react-native-paper';
 import Colors from '../../constants/Colors';
 
 /**
@@ -22,34 +24,84 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
       }}>
-      <Tabs.Screen
-        name="index"
+         <Tabs.Screen
+        name="two"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          title: 'Home',
+          headerTitleAlign: 'center',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="ios-home" size={25} color={color} /> // Use the home icon
           ),
+          headerLeft: () => (
+              <TouchableOpacity >
+                <Image source={require('../../assets/images/favicon.png')} style={styles.icon}/>
+
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity>
+                <Ionicons name="ios-search" size={25} color="black" style={{ marginRight: 15 }} />
+              </TouchableOpacity>
+            ),
+          
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="index"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerLeft: () => {
+            const navigation = useNavigation();
+      
+            return (
+              <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 10 }}>
+                <Ionicons name="ios-arrow-back" size={30} color="black" />
+              </TouchableOpacity>
+            );
+          },
+          title: 'Shop',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="ios-grid" size={25} color={color} /> // Use the home icon
+          ),
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons name="ios-search" size={25} color="black" style={{ marginRight: 15 }} />
+            </TouchableOpacity>
+          ),
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Tabs.Screen
+        name="three"
+        options={{
+          title: 'Cart',
+          headerTitleAlign: 'center',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="ios-cart" size={25} color={color} /> // Use the home icon
+          ),
+          headerLeft: () => {
+            const navigation = useNavigation();
+      
+            return (
+              <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 10 }}>
+                <Ionicons name="ios-arrow-back" size={30} color="black" />
+              </TouchableOpacity>
+            );
+          },
+            headerRight: () => (
+              <TouchableOpacity>
+                <Ionicons name="ios-search" size={25} color="black" style={{ marginRight: 15 }} />
+              </TouchableOpacity>
+            ),
+          
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  
+  icon: {
+marginLeft:15
+  },
+})
