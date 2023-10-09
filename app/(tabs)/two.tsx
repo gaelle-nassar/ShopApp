@@ -91,7 +91,7 @@ import { Text, View } from '../../components/Themed';
 
 export default function TabTwoScreen() {
   return (
-    <View>
+    <ScrollView style={styles.container}>
       <Text style={styles.Scrollviewtitle}>Scroll 1</Text>
     <ScrollView
       horizontal
@@ -120,11 +120,28 @@ export default function TabTwoScreen() {
       </View>
       ))}
     </ScrollView>
-    </View>
+    <Text style={styles.Scrollviewtitle}>Scroll 3</Text>
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.productContainer}
+    >
+      {products2.map((product) => (
+        <View style={styles.productCard}>
+        <Image style={styles.tinyLogo} source={product.image} />
+        <Text style={styles.item}>{product.name}</Text>
+        <Text style={styles.description}>{product.description}</Text>
+      </View>
+      ))}
+    </ScrollView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container:{
+    backgroundColor:'white'
+  },
   productContainer: {
     flexDirection: 'row',
     padding: 16,
