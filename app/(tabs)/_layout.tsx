@@ -95,6 +95,31 @@ export default function TabLayout() {
           
         }}
       />
+      <Tabs.Screen
+        name="four"
+        options={{
+          title: 'Address',
+          headerTitleAlign: 'center',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="ios-pin" size={25} color={color} /> // Use the home icon
+          ),
+          headerLeft: () => {
+            const navigation = useNavigation();
+      
+            return (
+              <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 10 }}>
+                <Ionicons name="ios-arrow-back" size={30} color="black" />
+              </TouchableOpacity>
+            );
+          },
+            headerRight: () => (
+              <TouchableOpacity>
+                <Ionicons name="ios-search" size={25} color="black" style={{ marginRight: 15 }} />
+              </TouchableOpacity>
+            ),
+          
+        }}
+      />
     </Tabs>
   );
 }

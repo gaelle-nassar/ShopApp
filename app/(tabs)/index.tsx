@@ -1,9 +1,11 @@
 import { SafeAreaView, FlatList,StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
+import { Link } from 'expo-router';
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
 import { IconButton } from 'react-native-paper';
 import { CartProvider, useCart } from '../CartContext';
+import { useNavigation } from '@react-navigation/native';
 interface Person {
   id: string;
   name: string;
@@ -89,7 +91,7 @@ const persons: Person[] = [
 
 export default function TabOneScreen() {
   const { addToCart } = useCart();
-
+  const navigation = useNavigation();
   return (
    
       <View>
@@ -99,7 +101,12 @@ export default function TabOneScreen() {
             renderItem={({ item }) => (
               <View style={styles.view1}>
                 <Image style={styles.tinyLogo} source={item.image} />
-                <Text style={styles.item}>{item.name}</Text>
+                <Link
+        href={{
+          pathname:'/insidepage',
+          params:{item: JSON.stringify(item)}
+        }}
+         ><Text style={styles.item}>{item.name}</Text></Link>
                 <TouchableOpacity
                   style={styles.cartButton}
                   onPress={() => addToCart(item)} // Use addToCart from useCart
